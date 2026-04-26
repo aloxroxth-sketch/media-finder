@@ -39,7 +39,7 @@ At the very bottom of the window is a **NEW SECTION** bar. Type a name like `jli
 
 -6. Scan
 
-Click **🔍 SCAN**. The results panel will fill with every matched file, labelled by which section it belongs to. Review this list before doing anything else.
+Click **SCAN**. The results panel will fill with every matched file, labelled by which section it belongs to. Review this list before doing anything else.
 
 -7. Copy
 
