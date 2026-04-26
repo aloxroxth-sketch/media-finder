@@ -62,3 +62,4 @@ Click **CLEAR** to wipe the results list and start fresh.
 =Notes
 - Files are **copied**, not moved. Your source folder is never modified.
 - Always review the scan results before copying. What you see is exactly what gets copied.
+- sadly i dont know how to code so i built using using ai as i am deeply sorry for this in convenience
