@@ -4,7 +4,7 @@ import threading
 import tkinter as tk
 from tkinter import ttk, filedialog, messagebox
 
-# ── Palette ────────────────────────────────────────────────────────────────
+
 BG       = "#0d0d14"
 PANEL    = "#13131e"
 CARD     = "#1a1a27"
@@ -13,7 +13,7 @@ TEXT     = "#e0deff"
 SUBTEXT  = "#6b688a"
 INPUT_BG = "#0a0a12"
 
-# ── Known extensions for autocomplete ─────────────────────────────────────
+
 ALL_KNOWN_EXTS = sorted([
     ".jpg",".jpeg",".png",".gif",".bmp",".tiff",".tif",".heic",".webp",
     ".raw",".cr2",".nef",".arw",".dng",".orf",".rw2",
@@ -45,7 +45,7 @@ FIXED_SECTIONS = [
 CUSTOM_COLORS = ["#00d2ff","#f953c6","#ee0979","#4facfe","#fddb92","#a8edea","#b721ff"]
 
 
-# ── Autocomplete Entry ─────────────────────────────────────────────────────
+
 class AutocompleteEntry(tk.Entry):
     """Entry that shows a dropdown of matching known extensions as you type."""
 
@@ -136,7 +136,6 @@ class AutocompleteEntry(tk.Entry):
             self._listbox = None
 
 
-# ── Section Card ───────────────────────────────────────────────────────────
 class SectionCard(tk.Frame):
     def __init__(self, parent, name, icon, color, folder, exts, canvas_ref, **kw):
         super().__init__(parent, bg=CARD, highlightthickness=1,
@@ -249,14 +248,13 @@ class SectionCard(tk.Frame):
         return {ext for ext, var in self.ext_vars.items() if var.get()}
 
 
-# ══════════════════════════════════════════════════════════════════════════════
 class App(tk.Tk):
     def __init__(self):
         super().__init__()
         self.title("Media Finder")
         self.configure(bg=BG)
 
-        # ── Fit to screen ──────────────────────────────────────────────────
+        
         self.update_idletasks()
         sw = self.winfo_screenwidth()
         sh = self.winfo_screenheight()
@@ -283,7 +281,7 @@ class App(tk.Tk):
         self._sections_area()
         self._new_section_bar()
 
-    # ── Header ─────────────────────────────────────────────────────────────
+  
     def _header(self):
         h = tk.Frame(self, bg=BG)
         h.pack(fill="x", padx=20, pady=(14, 2))
@@ -292,7 +290,7 @@ class App(tk.Tk):
         tk.Label(h, text="   scan · filter · copy into organised folders",
                  font=("Courier", 9), fg=SUBTEXT, bg=BG).pack(side="left", pady=4)
 
-    # ── Folder bar ─────────────────────────────────────────────────────────
+   
     def _folder_bar(self):
         bar = tk.Frame(self, bg=PANEL, padx=12, pady=8)
         bar.pack(fill="x", padx=20, pady=(0, 5))
@@ -319,7 +317,7 @@ class App(tk.Tk):
         self._btn(bar, "BROWSE", self._browse_dst, "#43e97b"
                   ).grid(row=0, column=5)
 
-    # ── Action bar ─────────────────────────────────────────────────────────
+
     def _action_bar(self):
         bar = tk.Frame(self, bg=BG)
         bar.pack(fill="x", padx=20, pady=(0, 4))
@@ -331,7 +329,6 @@ class App(tk.Tk):
         tk.Label(bar, textvariable=self.status_var, font=("Courier", 8),
                  fg=SUBTEXT, bg=BG, anchor="e").grid(row=0, column=3, sticky="e")
 
-    # ── Results ────────────────────────────────────────────────────────────
     def _results_panel(self):
         tk.Label(self, text="SCAN RESULTS", font=("Courier", 8, "bold"),
                  fg=SUBTEXT, bg=BG).pack(anchor="w", padx=20)
@@ -351,7 +348,7 @@ class App(tk.Tk):
         self.listbox.grid(row=0, column=0, sticky="nsew", padx=(6, 0), pady=4)
         sb.grid(row=0, column=1, sticky="ns", pady=4)
 
-    # ── Sections area ──────────────────────────────────────────────────────
+ 
     def _sections_area(self):
         tk.Label(self, text="SECTIONS", font=("Courier", 8, "bold"),
                  fg=SUBTEXT, bg=BG).pack(anchor="w", padx=20)
@@ -454,7 +451,6 @@ class App(tk.Tk):
         self._restore_ph(None)
         self.canvas.xview_moveto(1.0)
 
-    # ── Shared button factory ──────────────────────────────────────────────
     def _btn(self, parent, text, cmd, color):
         return tk.Button(parent, text=text, command=cmd,
                          font=("Courier", 8, "bold"), fg="white", bg=color,
@@ -469,7 +465,7 @@ class App(tk.Tk):
         d = filedialog.askdirectory()
         if d: self.dest_var.set(d)
 
-    # ── Scan ───────────────────────────────────────────────────────────────
+
     def _scan(self):
         src = self.source_var.get().strip()
         if not src or not os.path.isdir(src):
@@ -502,7 +498,6 @@ class App(tk.Tk):
         self.status_var.set(
             f"Found {count} file{'s' if count != 1 else ''}. Review, then COPY.")
 
-    # ── Copy ───────────────────────────────────────────────────────────────
     def _copy(self):
         if not self._found:
             messagebox.showinfo("Nothing to copy", "Run SCAN first.")
@@ -539,7 +534,6 @@ class App(tk.Tk):
                             f"Copied {copied} file(s).\n\nFolders created:\n" +
                             "\n".join(f"  /{f}/" for f in sorted(used)))
 
-    # ── Clear ──────────────────────────────────────────────────────────────
     def _clear(self):
         self.listbox.delete(0, "end")
         self._found = []
