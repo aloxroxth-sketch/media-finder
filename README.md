@@ -44,14 +44,15 @@ Click **SCAN**. The results panel will fill with every matched file, labelled by
 -7. Copy
 
 Once you are happy with the scan results, click **COPY**. Files are copied (not moved) into organised subfolders at your destination
-[
+-------
+
 /your-destination/
   /photos/
   /videos/
   /audio/
   /documents/
   /hujg/         ← if you created this section
-]
+-----
 If two files share the same name, the second one is automatically renamed (e.g. `photo_1.jpg`) so nothing is overwritten.
 
 -8. Clear
